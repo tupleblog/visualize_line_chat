@@ -1,8 +1,7 @@
 # Visualize LINE chat
 
-In LINE chat, you can export activities and text from your previous
-chat. Here, I create simple function (aim for teaching) to visualize
-those activities.
+In LINE chat, you can export previous chat activities. Here, I create simple function
+(aim for teaching) to visualize those activities.
 
 First, we can read the history from `txt` file using the following fucntion
 
@@ -21,7 +20,7 @@ line_utils.plot_chat_per_day(chats_dict)
 ```
 
 <div align = 'left'>
-  <img src="images/chat_per_day.jpg" width="250" />
+  <img src="image/chat_per_day.jpg" width="250" />
 </div>
 
 **Plot chats activities per users on given day**
@@ -33,7 +32,7 @@ line_utils.plot_chat_users_per_day(chats_dict, users=['user1', 'user2'])
 Here `users` is a list of username strings in the chat
 
 <div align = 'left'>
-  <img src="images/chat_users_per_day.jpg" width="250" />
+  <img src="image/chat_users_per_day.jpg" width="250" />
 </div>
 
 **Plot punch card activities**
@@ -45,5 +44,5 @@ line_utils.plot_punch_card_activities(chats_dict, users=['user1', 'user2'])
 
 ```
 <div align = 'left'>
-  <img src="images/punch_card.jpg" width="250" />
+  <img src="image/punch_card.jpg" width="250" />
 </div>

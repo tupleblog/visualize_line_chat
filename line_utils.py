@@ -18,15 +18,12 @@ def get_line_chat_dicts(file_name):
     chats = list(lines)
     chats = [c[0] for c in chats if len(c) > 0]
     chats_dict = defaultdict(list)
-    chats_dict['count'] = 0
     for chat in chats:
         date = re.findall(r'\d+\.\d+\.\d+', chat)
         if len(date) >= 1:
-            chats_dict['date'] = date
-            d = date
+            d = date[0]
         else:
-            chats_dict['chats'].append([d[0], chat])
-            chats_dict['count'] += 1
+            chats_dict['chats'].append([d, chat])
     chats_dict['total_chats'] = len(chats_dict['chats'])
     return chats_dict
 
