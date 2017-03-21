@@ -1,9 +1,8 @@
 # Visualize LINE chat
 
-In LINE chat, you can export previous chat activities. Here, I create simple function
-(aim for teaching) to visualize those activities.
-
-First, we can read the history from `txt` file using the following fucntion
+In [LINE chat](https://line.me/en/) (very popular app chat for Asian folks),
+we can read the history from exported text file (Save chat).
+We can use the following function in order to read the chat history text file.
 
 ```python
 import line_utils
