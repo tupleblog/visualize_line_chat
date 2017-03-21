@@ -9,6 +9,7 @@ from operator import itemgetter
 from collections import Counter
 import scipy.sparse as sp
 import matplotlib.pyplot as plt
+import random
 
 def get_line_chat_dicts(file_name):
     """
@@ -73,6 +74,12 @@ def day_of_week(day, n_bin=8):
     """
     return parser.parse(day).weekday()
 
+def gen_hex_colour_code():
+    """
+    Generate hex color
+    """
+    return '#' + ''.join([random.choice('0123456789ABCDEF') for x in range(6)])
+
 def get_users(chats_dict):
     """
     Get all users from chat dictionary
@@ -120,10 +127,12 @@ def plot_chat_per_day(chats_dict):
 
 def plot_chat_users_per_day(chats_dict):
     """
-    Plot number of chats per users
+    Plot number of chats per users over time
     """
     users = get_users(chats_dict)
+    n_users = len(users)
 
+    # split chat to time, user, chat string
     chat_users = []
     for date, chatlog in chats_dict['chats']:
         time, u, chat = split_chat(chatlog, users)
@@ -149,16 +158,19 @@ def plot_chat_users_per_day(chats_dict):
                 n_chats.append([parser.parse(c['date']), c['n_chat'], user])
         n_chats_all.append(n_chats)
         n_chats_user_all.append([v[1] for v in n_chats])
-    dates = [d[0] for d in n_chats_all[0]]
 
-    # for two users
+    colors = ['#007e8c', '#ffc0cb', '#488957'] # first set of colors
+    colors.extend([gen_hex_colour_code() for i in range(n_users)]) # random
+
     ax = plt.subplot(111)
-    ax.bar(dates, n_chats_user_all[0], width=0.5, color='#ffc0cb')
-    ax.bar([d + datetime.timedelta(hours=12)  for d in dates], n_chats_user_all[1], width=0.5, color='#007e8c')
+    for i, n_chat in enumerate(n_chats_all):
+        date = [v[0] + datetime.timedelta(hours=(i * 24./n_users)) for v in n_chat]
+        n_chat_user = [v[1] for v in n_chat]
+        ax.bar(date, n_chat_user, width=(1.0/n_users), color=colors[i])
     ax.xaxis_date()
     plt.xlabel('date')
-    plt.xticks(rotation=60)
     plt.ylabel('number of chats')
+    plt.xticks(rotation=60, ha='right')
     plt.legend(users)
     plt.show(block=False)
 
