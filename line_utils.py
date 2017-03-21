@@ -6,6 +6,7 @@ from collections import defaultdict
 from itertools import groupby
 import datetime
 from operator import itemgetter
+from collections import Counter
 import scipy.sparse as sp
 import matplotlib.pyplot as plt
 
@@ -72,6 +73,29 @@ def day_of_week(day, n_bin=8):
     """
     return parser.parse(day).weekday()
 
+def get_users(chats_dict):
+    """
+    Get all users from chat dictionary
+    """
+    chats = [c[1] for c in chats_dict['chats']]
+    chats = [re.sub('\d+:\d+', '', c).strip() for c in chats]
+    count_user = Counter([c.split()[0] for c in chats])
+    users = [k for k, v in count_user.items() if v > 10]
+
+    all_profile_names = []
+    for user in users:
+        user_chats = [chat for chat in chats if chat.split()[0] == user]
+        profile_name = [user]
+        for i in range(1, 3):
+            try:
+                next_key = Counter([u.split()[i] for u in user_chats])
+                u_next = [k for k, v in next_key.items() if v == len(user_chats)]
+                profile_name.extend(u_next)
+            except:
+                pass
+        all_profile_names.append(' '.join(profile_name))
+    return all_profile_names
+
 def plot_chat_per_day(chats_dict):
     """
     plot chat per day that from all chats
@@ -94,10 +118,12 @@ def plot_chat_per_day(chats_dict):
     plt.ylabel('number of chats')
     plt.show(block=False)
 
-def plot_chat_users_per_day(chats_dict, users=['user_name_1', 'user_name_2']):
+def plot_chat_users_per_day(chats_dict):
     """
     Plot number of chats per users
     """
+    users = get_users(chats_dict)
+
     chat_users = []
     for date, chatlog in chats_dict['chats']:
         time, u, chat = split_chat(chatlog, users)
@@ -136,10 +162,12 @@ def plot_chat_users_per_day(chats_dict, users=['user_name_1', 'user_name_2']):
     plt.legend(users)
     plt.show(block=False)
 
-def plot_punch_card_activities(chats_dict, users=['user_name_1', 'user_name_2']):
+def plot_punch_card_activities(chats_dict):
     """
     Punch card activities, plot in matrix format
     """
+    users = get_users(chats_dict)
+
     chat_users = []
     for date, chatlog in chats_dict['chats']:
         time, u, chat = split_chat(chatlog, users)

@@ -26,7 +26,7 @@ line_utils.plot_chat_per_day(chats_dict)
 **Plot chats activities per users on given day**
 
 ```python
-line_utils.plot_chat_users_per_day(chats_dict, users=['user1', 'user2'])
+line_utils.plot_chat_users_per_day(chats_dict)
 ```
 
 Here `users` is a list of username strings in the chat
@@ -40,7 +40,7 @@ Here `users` is a list of username strings in the chat
 To see at what time in week, you're chatting with your friends the most.
 
 ```python
-line_utils.plot_punch_card_activities(chats_dict, users=['user1', 'user2'])
+line_utils.plot_punch_card_activities(chats_dict)
 
 ```
 <div align = 'left'>
