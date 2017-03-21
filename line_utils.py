@@ -11,7 +11,7 @@ import scipy.sparse as sp
 import matplotlib.pyplot as plt
 import random
 
-def get_line_chat_dicts(file_name):
+def read_line_chat(file_name):
     """
     Given Line chat history, return chat dictionary which has following keys
     count, chats, total_chats
@@ -142,22 +142,20 @@ def plot_chat_users_per_day(chats_dict):
                                'user': u,
                                'chat': chat})
 
-    grouper = itemgetter("date", "user")
     chats_per_day = []
+    grouper = itemgetter("date", "user")
     for key, group in groupby(sorted(chat_users, key=grouper), grouper):
         temp_dict = dict(zip(["date", "user"], key))
         temp_dict["n_chat"] = len([item for item in group])
         chats_per_day.append(temp_dict)
 
     n_chats_all = []
-    n_chats_user_all = []
     for user in users:
         n_chats = []
         for c in chats_per_day:
             if user in c['user']:
                 n_chats.append([parser.parse(c['date']), c['n_chat'], user])
         n_chats_all.append(n_chats)
-        n_chats_user_all.append([v[1] for v in n_chats])
 
     colors = ['#007e8c', '#ffc0cb', '#488957'] # first set of colors
     colors.extend([gen_hex_colour_code() for i in range(n_users)]) # random

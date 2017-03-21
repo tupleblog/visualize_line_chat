@@ -6,13 +6,13 @@ We can use the following function in order to read the chat history text file.
 
 ```python
 import line_utils
-chats_dict = line_utils.get_line_chat_dicts('chat_history.txt')
+chats_dict = line_utils.read_line_chat('chat_history.txt')
 ```
 
 `chats_dict` is a chat dictionary which the following keys: `count`, `chats`, `total_chats`
 
 
-**Plot chats activities on given day**
+**Plot total chats activities on given day**
 
 ```python
 line_utils.plot_chat_per_day(chats_dict)
