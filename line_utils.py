@@ -10,8 +10,6 @@ from collections import Counter
 import scipy.sparse as sp
 import matplotlib.pyplot as plt
 import random
-from scipy.optimize import curve_fit
-from scipy.misc import factorial
 
 def read_line_chat(file_name):
     """
@@ -90,8 +88,8 @@ def avg_response_rate(ls, wait_time=60):
     n_chats = 0
     for n_chat, r in Counter(ls).items():
         if r <= wait_time:
-            weight_n_chats += n * r
-            n_chats += n
+            weight_n_chats += n_chat * r
+            n_chats += n_chat
     return weight_n_chats/n_chats
 
 def get_users(chats_dict):
@@ -274,10 +272,10 @@ def plot_response_rate(chats_dict):
     # plot and print response rate of users
     for i, user in enumerate(users):
         resp = users_response_summary[user]
-        plt.hist(resp, bins=range(0, 30), alpha=0.2, color=colors[i])
-        avg_rate = 1./avg_response_rate(resp, wait_time=30)
-        print('response rate of %s = %s' % (user, str(avg_rate)))
+        plt.hist(resp, bins=range(0, 30), alpha=0.5, color=colors[i])
+        avg_rate = str(1./avg_response_rate(resp, wait_time=60))
+        print('response rate of %s = %s' % (user, avg_rate))
     plt.legend(users)
     plt.xlabel('response time (mins)')
     plt.ylabel('normalized number of chats ')
-    plt.show()
+    plt.show(block=False)
