@@ -40,8 +40,21 @@ To see at what time in week, you're chatting with your friends the most.
 
 ```python
 line_utils.plot_punch_card_activities(chats_dict)
-
 ```
+
 <div align = 'left'>
   <img src="image/punch_card.jpg" width="250" />
+</div>
+
+**Plot response rate and time**
+
+Plot and print average response time for each users before replying
+to the next chat
+
+```python
+line_utils.plot_response_rate(chats_dict)
+```
+
+<div align = 'left'>
+  <img src="image/response_time.jpg" width="250" />
 </div>
