@@ -1,5 +1,3 @@
-//note: json file has been modified to keep my relationship private
-
 var r = new Rune({
   container: "#canvas",
   width: 380,
