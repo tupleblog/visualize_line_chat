@@ -7,7 +7,7 @@ var r = new Rune({
 
 $.ajax({
   type: 'GET',
-  url: "https://gist.githubusercontent.com/titipata/9a5ff79c53dedd36368388a72bd72db7/raw/3fa3048b830365d468c04a3e321770c2de9684a5/example.json",
+  url: "https://gist.githubusercontent.com/titipata/33bd071df166c135bcd5d87a6b53c32c/raw/e662e0dab90dc37dd615020418770655d4fac522/example_bim.json",
   dataType: 'json',
   success: function(result){
   var x = 0;
