@@ -63,3 +63,9 @@ line_utils.plot_response_rate(chats_dict)
 
 We also put example to visualize using `rune.js` in `docs` folder based on [medium post](https://medium.com/@wipaweeeeee/call-me-adele-f37162b6ffe5).
 See example at [titipata.github.io/visualize_line_chat](https://titipata.github.io/visualize_line_chat/).
+
+
+**LINE to MIDI example**
+
+`line2midi.py` stores how to convert chat to MIDI file. This was done at
+Stupid Hackathon 
