@@ -20,11 +20,23 @@ def read_line_chat(file_name):
     chats = list(lines)
     chats = [c[0] for c in chats if len(c) > 0]
     chats_dict = defaultdict(list)
+    is_found_first_date = False
     for chat in chats:
         date = re.findall(r'\d+\.\d+\.\d+', chat)
+        
+        #Android date format
+        if len(date) == 0:
+            date = re.findall('^\d+\/\d+\/\d+', chat)
+        
+        #Skip line until found date
+        if is_found_first_date == False and len(date) == 0:
+            continue
+            
         if len(date) >= 1:
+            is_found_first_date = True
             d = date[0]
         else:
+            chat = re.sub('^24:', '00:', chat)
             chats_dict['chats'].append([d, chat])
     chats_dict['total_chats'] = len(chats_dict['chats'])
     return chats_dict
