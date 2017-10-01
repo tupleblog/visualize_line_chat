@@ -23,15 +23,19 @@ def read_line_chat(file_name):
     is_found_first_date = False
     for chat in chats:
         date = re.findall(r'\d+\.\d+\.\d+', chat)
-        
+
         #Android date format
         if len(date) == 0:
             date = re.findall('^\d+\/\d+\/\d+', chat)
-        
+
         #Skip line until found date
         if is_found_first_date == False and len(date) == 0:
             continue
-            
+
+        #Empty line
+        if len(chat.strip()) == 0:
+            continue
+
         if len(date) >= 1:
             is_found_first_date = True
             d = date[0]
