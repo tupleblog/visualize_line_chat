@@ -59,6 +59,14 @@ line_utils.plot_response_rate(chats_dict)
   <img src="image/response_time.jpg" width="250" />
 </div>
 
+**Generate single HTML file to visualize report**
+```
+python line-visualize.py  -i INPUT_CHAT.txt -o output.html
+```
+
+Example HTML visualize report: 
+[https://goo.gl/tMmGix](https://goo.gl/tMmGix)
+
 **runejs example**
 
 We also put example to visualize using `rune.js` in `docs` folder based on [medium post](https://medium.com/@wipaweeeeee/call-me-adele-f37162b6ffe5).

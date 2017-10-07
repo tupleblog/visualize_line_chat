@@ -131,7 +131,7 @@ def get_users(chats_dict):
         all_profile_names.append(' '.join(profile_name))
     return all_profile_names
 
-def plot_chat_per_day(chats_dict):
+def plot_chat_per_day(chats_dict, save_file=None):
     """
     plot chat per day that from all chats
     """
@@ -153,7 +153,10 @@ def plot_chat_per_day(chats_dict):
     plt.ylabel('number of chats')
     plt.show(block=False)
 
-def plot_chat_users_per_day(chats_dict):
+    if save_file is not None:
+        plt.savefig(save_file, bbox_inches='tight')
+
+def plot_chat_users_per_day(chats_dict, save_file=None):
     """
     Plot number of chats per users over time
     """
@@ -200,7 +203,10 @@ def plot_chat_users_per_day(chats_dict):
     plt.legend(users)
     plt.show(block=False)
 
-def plot_punch_card_activities(chats_dict):
+    if save_file is not None:
+        plt.savefig(save_file, bbox_inches='tight')
+
+def plot_punch_card_activities(chats_dict, save_file=None):
     """
     Punch card activities, plot in matrix format
     """
@@ -242,7 +248,10 @@ def plot_punch_card_activities(chats_dict):
                        rotation=60, ha='left')
     plt.show(block=False)
 
-def plot_response_rate(chats_dict):
+    if save_file is not None:
+        plt.savefig(save_file, bbox_inches='tight')
+
+def plot_response_rate(chats_dict, save_file=None):
     """
     This only works for two users right now.
     Given chat dictionary, plot histogram of response rate
@@ -285,13 +294,20 @@ def plot_response_rate(chats_dict):
         for g in group:
             users_response_summary[key].append(g[1])
 
+    ret_data = []
     # plot and print response rate of users
     for i, user in enumerate(users):
         resp = users_response_summary[user]
         plt.hist(resp, bins=range(0, 30), alpha=0.5, color=colors[i])
         avg_rate = str(1./avg_response_rate(resp, wait_time=60))
+        ret_data.append({"user": user, "avg_rate": avg_rate})
         print('response rate of %s = %s' % (user, avg_rate))
     plt.legend(users)
     plt.xlabel('response time (mins)')
     plt.ylabel('normalized number of chats ')
     plt.show(block=False)
+
+    if save_file is not None:
+        plt.savefig(save_file, bbox_inches='tight')
+
+    return ret_data
